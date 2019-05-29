@@ -54,19 +54,19 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 
 	/**
-	 * aggiunge un Edge orientato nel grafo.
-	 * il metodo controlla se i due vertici forniti come parametri sono già presenti nel grafo,
-	 * in caso contrario procede ad inserirli tramite il metodo addVertex ed infine, dopo aver creato un Edge v1 -> v2 (uscente da v1 e entrante in v2), 
-	 * lo aggiunge alla lista degli adicenti (neighbors) del vertice v1.
-	 * @param v1 vertice da cui l'Edge è uscente
-	 * @param v2 vertice adiacente a v1
-	 * @param info informazioni riguardanti l'Edge, possono anche essere null.
-	 * @exception IllegalArgumentException l'eccezzione viene sollevata in caso uno dei due nodes o entrambi siano null.
-	 * @return booleano, true in caso di Edge aggiunto correttamente, altrimenti, se già presente false.
+	 * add an oriented edge.
+	 * the method check if the two vertices are present in the graph
+	 * if they are not present the method add them and the relative edge
+	 * add him to the neighbors of v1
+	 * @param v1 the source vertex
+	 * @param v2 the vertex adjacent to v1
+	 * @param info information about the edge, it can be null
+	 * @exception IllegalArgumentException if one of both the edges are null.
+	 * @return true if the edge is successful added, false if not
 	 */
 	@Override
 	public boolean addEdge(V v1, V v2, E info) {
-		if(v1 == null || v2 == null ) throw new IllegalArgumentException("il nodo non può essere null");
+		if(v1 == null || v2 == null ) throw new IllegalArgumentException("The node can't be null");
 		if(nodes.contains(v1)){
 			if(!nodes.contains(v1)) addVertex(v1);
 			if(!nodes.contains(v2)) addVertex(v2);
@@ -80,16 +80,16 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 
 	/**
-	 * aggiunge un Edge orientato pesato al grafo
-	 * il metodo controlla se i due vertici forniti come parametri sono già presenti nel grafo,
-	 * in caso contrario procede ad inserirli tramite il metodo addVertex ed infine, dopo aver creato un Edge v1 -> v2 (uscente da v1 e entrante in v2) con peso weight, 
-	 * lo aggiunge alla lista degli adicenti (neighbors) del vertice v1.
-	 * @param v1 vertice da cui l'Edge è uscente
-	 * @param v2 vertice adiacente a v1
-	 * @param info informazioni riguardanti l'Edge, possono anche essere null.
-	 * @param weight peso dell'Edge.
-	 * @exception IllegalArgumentException l'eccezzione viene sollevata in caso uno dei due nodes o entrambi siano null.
-	 * @return booleano, true in caso di Edge aggiunto correttamente, altrimenti, se già presente false.
+	 * add an oriented edge with relative weight.
+	 * the method check if the two vertices are present in the graph
+	 * if they are not present the method add them and the relative edge
+	 * add him to the neighbors of v1
+	 * @param v1 the source vertex
+	 * @param v2 the vertex adjacent to v1
+	 * @param weight the weight of the edge
+	 * @param info information about the edge, it can be null
+	 * @exception IllegalArgumentException if one of both the edges are null.
+	 * @return true if the edge is successful added, false if not
 	 */
 	@Override 
 	public boolean addEdge(V v1, V v2, double weight, E info) {
@@ -106,15 +106,16 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 		}
 		return false;
 	}
+	
 	/**
-	 * aggiunge un Edge non orientato al grafo.
-	 * il metodo crea un Edge orientato uscente da v1 e entrante in v2 e un altro Edge uscente da v2 e entrante in v1.
-	 * si serve del metodo addEdge definito in precedenza.
-	 * in questo modo l'Edge verrà aggiunto sia alla lista di adiacenza di v2 che di v2 in modo che l'Edge sia incidente su entrambi in nodes.
-	 * @param v1 vertice da cui l'Edge è uscente
-	 * @param v2 vertice adiacente a v1
-	 * @param info informazioni riguardanti l'Edge, possono anche essere null.
-	 * @return booleano, true in caso di Edge aggiunto correttamente in entrambe le liste di adiacenza, altrimenti, se già presente in entrambe le liste di adiacenza false.
+	 * add a NOT oriented edge.
+	 * the method create two edges: v1->v2 and v2->v1
+	 * use the method addEdge
+	 * the edge will be added to the adjacent list of v1 and v2
+	 * @param v1 vertex 
+	 * @param v2 vertex adjacent to v1
+	 * @param info information about the edge, it can be null
+	 * @return boolean, true if the edge is successful added in both the adjacent list, false if they are present yet.
 	 */
 	@Override
 	public boolean addUndirectedEdge(V v1, V v2, E info) {
@@ -122,16 +123,17 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 		else return false;
 	}
 
+
 	/**
-	 * aggiunge un Edge pesato non orientato al grafo.
-	 * il metodo crea un Edge orientato uscente da v1 e entrante in v2 e un altro Edge uscente da v2 e entrante in v1 entrambi con peso weight.
-	 * si serve del metodo addEdge definito in precedenza.
-	 * in questo modo l'Edge verrà aggiunto sia alla lista di adiacenza di v2 che di v2 in modo che l'Edge sia incidente su entrambi in nodes.
-	 * @param v1 vertice da cui l'Edge è uscente
-	 * @param v2 vertice adiacente a v1
-	 * @param weight peso dell'Edge non oreintato (peso degli edges orientati in entrambe le direzioni).
-	 * @param info informazioni riguardanti l'Edge, possono anche essere null.
-	 * @return booleano, true in caso di Edge aggiunto correttamente in entrambe le liste di adiacenza, altrimenti, se già presente in entrambe le liste di adiacenza false.
+	 * add a NOT oriented edge with relative weight.
+	 * the method create two edges: v1->v2 and v2->v1
+	 * use the method addEdge
+	 * the edge will be added to the adjacent list of v1 and v2
+	 * @param v1 vertex 
+	 * @param v2 vertex adjacent to v1
+	 * @param weight the weight of the edge
+	 * @param info information about the edge, it can be null
+	 * @return boolean, true if the edge is successful added in both the adjacent list, false if they are present yet.
 	 */
 	@Override
 	public boolean addUndirectedEdge(V v1, V v2, double weight, E info) {
@@ -140,10 +142,9 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 		return true;
 	}
 	/**
-	 * controlla se un vertice,fornito come parametro, è presente nel grafo.
-	 * il metodo invoca contains dell'ArrayList sulla lista dei vertici del grafo, se è presente resituisce true false altrimenti
-	 * @param vertex vertice di cui si vuole sapere o meno la presenza all'interno del grafo.
-	 * @return booleano true in caso di vertice presente nel grafo, false altrimenti
+	 *check if the vertex is present in the graph
+	 * @param vertex to check
+	 * @return boolean true if it is present not otherwise
 	 */
 	@Override
 	public boolean hasVertex(V vertex) {
@@ -152,12 +153,11 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 		return false;
 	}
 /**
- * conrrolla se esiste un Edge v1 -> v2.
- * il metodo prima esegue un controllo all'interno della lista dei nodes del grafo, se entrambi i vertici sono presenti,
- * procede al controllo all'interno della lista di adiacenti di v1 per vedere se l'Edge v1 -> v2 è presente.
- * @param v1 nodo uscente dell'Edge cercato
- * @param v2 nodo entrante dell'Edge cercato
- * @return booleano, true se l'Edge v1 -> v2 fa parte del grafo, false altrimenti
+ * check if the Edge v1 -> v2 is present
+ * the method check for first if the vertices are both present, than check in the adjacent list if they are both present.
+ * @param v1 source node
+ * @param v2 destination node
+ * @return boolean, true if the Edge v1 -> v2 is in the graph, otherwise
  */
 	@Override
 	public boolean hasEdge(V v1, V v2) {
@@ -172,13 +172,11 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 
 	/**
-	 * restituisce il peso di un Edge source -> dest
-	 * il metodo invoca la procedure getEdge fornendo come parametro i due vertici dati in input,
-	 * una volta trovato l'Edge ne restituisce il peso, 
-	 * in caso di un Edge senza peso viene restituito 1.
-	 * @param source nodo uscente (sorgente) dell'Edge cercato.
-	 * @param dest nodo entrante(destinazione) dell'Edge cercato
-	 * @return peso dell'Edge espresso in double.
+	 * return the weight of an Edge source -> dest
+	 * in case of an Edge without weight it returns 1
+	 * @param source source node of the edge
+	 * @param dest destination node of the edge
+	 * @return weight of the edge
 	 */
 	@Override
 	public double getWeight(V source, V dest) {
@@ -186,8 +184,8 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 
 	/**
-	 * restituisce la lista dei nodes presenti nel grafo
-	 * @return ArrayList contenente tutti i nodes inseriti, fino al momento dell'invocazione, all'interno del grafo
+	 * return the list of vertices
+	 * @return ArrayList of all the inserted vertices
 	 */
 	@Override
 	public ArrayList<V> vertices() {
@@ -195,10 +193,9 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 
 	/**
-	 * restituisce la lista dei nodes adiacenti al nodo passato come parametro.
-	 * grazie all'HashMap il metodo riesce a trovare la lista dei suoi adiacenti e viene restituita attraverso questo metodo.
-	 * @param vertex vertice di cui si vuole ottenere la lista dei suoi nodes adiacenti.
-	 * @return lista dei noidi agiagenti al nodo fornito come parametro, in caso non abbia nodes adiacenti la procedura restituisce null.
+	 * return the list of the adjacent nodes of a selected one.
+	 * @param vertex selected vertex
+	 * @return the list of the adjacent nodes of the vertex, null if he havent .
 	 */
 	@Override
 	public ArrayList<V> neighbors(V vertex) {
@@ -214,11 +211,11 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 	}
 	
 	/**
-	 * restituisce l'Edge source -> dest se presente nel grafo.
-	 * il metodo ricerca all'interno della lista degli edges del nodo source, se esiste un Edge che ha come sorgente source e destinazione dest
-	 * @param source nodo uscente dell'Edge source > dest
-	 * @param dest nodo entrante dell'Edge source -> dest
-	 * @return se presente Edge source --> dest, altrimenti null
+	 * return the Edge source -> dest if it is present in the graph.
+	 * the method search into the edges list of the node sourde if exist an edge with source as source and dest as destination
+	 * @param source source node of the edge source->dest
+	 * @param dest destination of the Edge source -> dest
+	 * @return true if the is present Edge source --> dest, null otherwise
 	 */
 	public Edge getEdge(V source, V dest){
 		ArrayList<Edge> neighbors = (ArrayList<Edge>)edges.get(source);
@@ -230,31 +227,22 @@ public class SparseGraph<V,E> implements Graph<V,E>{
 		return null;
 	}
 	/**
-	 * stampa la lista dei nodes del grafo
-	 * la procedura scorre la lista dei nodes attraverso un for e per ogni nodo che incontra ne stampa il valore su console.
+	 * print the list of nodes in the console
 	 */
 	public void printVertex(){
 		for(V i : nodes)
 			System.out.println(i);
 	}
 	/**
-	 * stampa la lista di adiacenza del vertice passato come parametro;
-	 * dopo aver ottento la lista di adiacenza del nodo passato come parametro,
-	 * scorre tale seqenza con un for e stampa a video l'Edge.
-	 * @param vertex vertice di cui si vuole stampare la lista di adiacenza
+	 *print the adjacent list of a certain vertex passed as parameter
+	 * @param vertex 
 	 */
 	public void printNeighbors(V vertex){
 		ArrayList<Edge> neighbors = (ArrayList<Edge>)edges.get(vertex);
 		for(Edge<V,E> a : neighbors)
-			System.out.println("iniziale: "+a.getIn()+" finale: "+a.getOut()+" info: "+a.getInfo());
+			System.out.println("initial: "+a.getIn()+" final: "+a.getOut()+" info: "+a.getInfo());
 	}
 	
-	/**
-	 * crea un file .dot per esserre elaborato da graphviz.
-	 * metodo che crea un file .dot con nome del file passato come parametro, 
-	 * che poi sarà laborato da graphviz per produrne un immagine del grafo.
-	 * @param GraphName nome che si è deciso di dare al file .dot.
-	 */
 	public void toDot(String GraphName) throws IOException{
 		String Graph = GraphName+".dot";
 	  FileWriter outFile = new FileWriter(Graph, false);
