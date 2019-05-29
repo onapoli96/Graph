@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Giorgio
  *
  * @param <V> generic type to represent the vertex of the graph
- * @param <E> generic type to represent the information about the edges of the grapg
+ * @param <E> generic type to represent the information about the edges of the graph
  */
 public interface Graph<V, E> {
 	
@@ -39,7 +39,7 @@ public interface Graph<V, E> {
 	boolean addEdge(V v1,V v2,double weight,E info);
 	
 	/**
-	 *add the edge v1->v2 if it is not present in the graph (with weight)
+	 *add the undirected edge v1->v2 if it is not present in the graph 
 	 * @param v1 source vertex
 	 * @param v2 destination vertex
 	 * @param weight weight of the edge
@@ -47,51 +47,58 @@ public interface Graph<V, E> {
 	 * @return true if it is correctly inserted, else false (edge present).
 	 */
 	boolean addUndirectedEdge(V v1,V v2,E info);
+	
 	/**
-	 * aggiunge un arco non orientato v1 <-> v2 con informazione info e peso weight.
-	 * @param v1 un nodo dell'arco
-	 * @param v2 altro nodo dell'arco
-	 * @param info informazione sull'arco
-	 * @param weight peso dell'arco
-	 * @return true se l'arco è stato inserito correttamente, false altrimenti.
+	 **add the undirected edge v1->v2 if it is not present in the graph  (with edge)
+	 * @param v1 source vertex
+	 * @param v2 destination vertex
+	 * @param weight weight of the edge
+	 * @param info information about the edge
+	 * @return true if it is correctly inserted, else false (edge present).
 	 */
 	boolean addUndirectedEdge(V v1,V v2,double weight,E info);
+	
 	/**
-	 * controlla se vertex è presente nel grafo.
-	 * @param vertex vertice di cui si vuole conoscere la presenza nel grafo.
-	 * @return true se è contenuto nel grafo, false altrimenti.
+	 * check if the vertex is in the graph
+	 * @param vertex vertex to check
+	 * @return true if is in the graph, false otherwise
 	 */
 	boolean hasVertex(V vertex);
+	
 	/**
-	 * controlla se l'arco v1 -> v2 è presente nel grafo
-	 * @param v1 vertice uscente dell'arco
-	 * @param v2 vertice entrante dell'arco
-	 * @return true se l'arco è nel grafo, false altrimenti.
+	 * check if the edge is in the graph
+	 * @param v1 vertex to check
+	 * @param v2 vertex to check
+	 * @return true if is in the graph, false otherwise
 	 */
 	boolean hasEdge(V v1,V v2);
+	
 	/**
-	 * fornisce il peso dell'arco source -> dest
-	 * @param source sorgente dell'arco
-	 * @param dest destinazione dell'arco
-	 * @return valore del peso dell'arco espresso con il tipo double.
+	 * return the weight of the edge source->dest
+	 * @param source source of the edge
+	 * @param dest destination of the edge
+	 * @return return the weight of the edge source->dest
 	 */
 	double getWeight(V source, V dest);
+	
 	/**
-	 * resitutisce i vertici del grafo sottoforma di un ArrayList
-	 * @return ArrayList di vertici del grafo
+	 * return the vertices of the graph stored in an ArrayList
+	 * @return ArrayList of vertices
 	 */
 	ArrayList<V> vertices();
+	
 	/**
-	 * restituisce i nodi che sono adiacenti al vertice vertex, sotto forma di un ArrayLis.
+	 * return the adjacent vertices of a vertex
 	 * 
-	 * @param vertex vertice di cui si vuole conoscere gli adiacenti.
-	 * @return ArrayList con i vertici che sono vicini di vertex.
+	 * @param vertex
+	 * @return ArrayList with the adjacent vertices
 	 */
 	ArrayList<V> neighbors(V vertex);
+	
 	/**
-	 * crea la rappresentazione in formato dot language del grafo e ne crea un file che potrà essere elaborato da graphviz
-	 * @param string path e nome del file che si vuole creare.
-	 * @throws IOException in caso non fosse possibile scivere il file
+	 * 
+	 * @param string path and name of file that tou want to create
+	 * @throws IOException
 	 */
 	void toDot(String string) throws IOException;
 }
